@@ -1,0 +1,218 @@
+<html>
+   <head>
+      <title>VueJs Introduction</title>
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
+	  <script type = "text/javascript" src="js/jquery.min.js"></script>
+	  <script type = "text/javascript" src="js/bootstrap.min.js"></script>
+      <script type = "text/javascript" src = "js/vue.js"></script>
+	  <script type = "text/javascript" src="js/vue-resource.js"></script> 
+	  <style>
+		.httpClass {
+			display: inline-block;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			transition: 0.3s;
+			padding: 9px;
+		}
+	  </style> 
+   </head> 
+	<body id="vueInfo">
+		<div id = "intro" class="jumbotron text-center">
+			<h1>{{ message }}</h1>
+			<p>{{ intro }}</p> 
+		</div> 
+		<div class="container">
+			<div class="row">
+			
+				<div id="basicVue" class="col-sm-4">  
+					<div class="card border-primary  mb-3">
+					  <div class="card-header">
+						To Bind Basic Details 
+					  </div>
+					  <div class="card-body text-primary"  style="min-height:190px">
+						<h5 class="card-title">{{ fName }} {{ lName }}</h5>
+						<p class="card-text">This section used to handle data object in vvueJs...</p> 
+					  </div>
+					</div>  
+				</div>
+				
+			
+				<div id="methodHandle" class="col-sm-4"> 
+					<div class="card border-secondary  mb-3">
+					  <div class="card-header">
+						To Handle Method Details 
+					  </div>
+					  <div class="card-body text-secondary" style="min-height:190px">
+						<h5 class="card-title">{{ firstname }} {{ lastname }}</h5>
+						<p class="card-text">This section used to handle method in vueJs..</p>
+						<p>{{ mydetails() }}</p> 
+					  </div>
+					</div> 
+				</div>  
+				
+				<div id="htmlContent" class="col-sm-4"> 
+					<div class="card border-success  mb-3">
+					  <div class="card-header">
+						To Bind HTML Content Details 
+					  </div>
+					  <div class="card-body text-success" style="min-height:190px">
+						<h5 class="card-title">{{ name }}</h5>
+						<p>To learn how to get an output in the form of HTML template on the screen.</p>
+						<p v-html="htmlContent"></p>
+					  </div>
+					</div>  
+				</div>
+				
+			</div>
+			<div class="clearfix"></div>
+			<hr>
+			<div class="row">
+				<div id="imageBind" class="col-sm-4"> 
+					<div class="card border-danger mb-3">
+					  <div class="card-header">
+						Bind Image using Vue Js
+					  </div>
+					  <img class="card-img-top" v-bind:src = "imgSrc" alt="Image">
+					  <div class="card-body text-danger"  style="min-height:190px">
+						<h5 class="card-title">{{ title }}</h5>
+						<p class="card-text">This section used to Bind Image in VueJs...</p> 
+						<p class="card-text">{{ name }}</p> 
+						<p class="card-text">{{ mobile }}</p>  
+					  </div>
+					</div> 
+				</div>
+				
+				<div id="component_test" class="col-sm-4"> 
+					<div class="card border-info mb-3">
+					  <div class="card-header">
+						Component Module using Vue Js
+					  </div>
+					  <div class="card-body text-info"  style="min-height:190px">
+						<h5 class="card-title">{{ title }}</h5>
+						<p class="card-text">This section used to handle Component in vvueJs...</p> 
+						<testcomponent></testcomponent>
+						<testcomponent1></testcomponent1>
+					  </div>
+					</div>  
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<hr>
+			
+			<div class="row"> 
+				<div class="col-md-12 " id="myJson" > 
+					<div class="card border-dark mb-3">
+					  <div class="card-header">
+						Service(http) Method Using Vue Js 
+					  </div>
+					  <div class="card-body text-dark"  style="min-height:190px">
+						<h5 class="card-title" > 
+							<div class="col-md-4 httpClass"v-for="(item, index) in jsonValue"  >{{ index + 1 }} - {{ item.label }} ({{ item.value }}) </div>
+						</h5> 
+					  </div>
+					</div> 
+				</div>
+			</div>
+		
+		</div>
+
+
+			 
+	 
+      <script type = "text/javascript">
+	  //=== Basic Vue Js ===//
+        var vue_det = new Vue({
+            el: '#intro',
+            data: {
+               message: 'Welcome to vueJs Tutorial.!',
+			   intro : "Let's start to learn vueJs "
+            }
+         });
+		 
+		 //=== Object Vue Js ===//
+		var dataObj = { fName : 'Hello', lName : 'World'  };
+		var objData = new Vue( { 		
+			el : '#basicVue',
+			data :  dataObj			
+		});
+		 
+		//=== Method Handing Vue Js ===// 
+		var  vm = new Vue({
+			   el: '#methodHandle',
+			   data: {
+				  firstname : "John",
+				  lastname  : "Doe",
+				  address    : "USA"
+			   },
+			   methods: {
+				  mydetails : function() {
+					 return "I am "+this.firstname +" "+ this.lastname;
+				  }
+			   }
+		}); 
+		 		
+		
+		//=== Bind HTML COntent Vue Js ===//
+		var htmlData = new Vue ({ 
+			el : '#htmlContent',
+			data : {
+					name : 'John',
+					mobile : '9874563210',
+					htmlContent : '<h3>Hai John..!</h3>'				
+			}
+			
+		});
+		
+		//=== Bind Image Vue Js ===//
+		var imgData = new Vue ({ 
+			el : '#imageBind',
+			data : {
+					title : 'Image Bind Using Vue Js',
+					name  : 'John',
+					mobile : '9874563210',
+					imgSrc : 'img/bindImage.png'				
+			}
+			
+		});
+		
+		//=== Component Module Vue Js ===//
+		var cmpModule = new Vue({ 
+			el : '#component_test',
+			data : { title : 'Here I use two components' },
+			components : {
+				'testcomponent' : {
+					template : '<p> <b> This is component example 1 test module.. </b> </p>'
+				},
+				'testcomponent1' : {
+					template : '<p> <b> This is component example 2 test module.. </b></p>'
+				}
+			}
+		
+		}); 
+		
+	//=== Http Service Vue Js ===//
+	var link = 'https://api.myjson.com/bins/i46iz';
+
+	var jsonData = new Vue({  
+		el : '#myJson',
+		data: {
+			jsonValue: []
+		},
+		methods:{
+			getJsons: function(){
+				//var self=this;
+				this.$http.get('https://api.myjson.com/bins/i46iz').then(function(response){ console.log(response);
+					this.jsonValue = response.data;  
+				}, function(error){
+					console.log(error.statusText);
+				});
+			}
+		},
+		mounted: function () {
+			this.getJsons();
+		}  
+	});	
+		
+		
+      </script>
+   </body>
+</html>
